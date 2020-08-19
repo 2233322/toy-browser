@@ -1,3 +1,4 @@
+const { addCSSRules, computeCSS } = require('./cssRulesParser')
 const EOF = Symbol('EOF')  // EOF: End Of File
 
 let currentToken = null
@@ -36,6 +37,8 @@ function emit(token) {
         top.children.push(element)
         element.parent = top
 
+        computeCSS(element)
+
         if (!token.isSelfClosing) {
             stack.push(element)
         }
@@ -45,6 +48,11 @@ function emit(token) {
         if (top.tagName !== token.tagName) {
             throw new Error(`Tag start:${top.tagName} end:${token.tagName} doesn't match!`)
         } else {
+
+            if (top.tagName === 'style') { 
+                //  添加css
+                addCSSRules(top.children[0].content)
+            }
             stack.pop()
         }
         currentTextNode = null
@@ -68,7 +76,7 @@ function parserHTML (html) {
         state = state(c)
     }
     state = state(EOF)
-    console.log(stack)
+    return stack
 }
 // 状态 https://html.spec.whatwg.org/multipage/parsing.html#tokenization
 function data(c) {

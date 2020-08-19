@@ -21,3 +21,8 @@ Transfer-Encodeing: chunked
 <html><body>Hello world</body></html>
 
 0
+
+
+## response 返回的数据是流 stream 用状态机处理body
+
+## 

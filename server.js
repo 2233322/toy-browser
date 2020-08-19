@@ -4,7 +4,7 @@ const server = http.createServer((req, res) => {
     console.log('request received')
 
     req.on('data', function (body) {
-        console.log(body.toString())
+        console.log(body.toString()) 
     });
       res.writeHead(200, {
         'X-Foo2': 'bar2',
@@ -15,6 +15,9 @@ const server = http.createServer((req, res) => {
       res.write(`<html maaa=a >
       <head>
         <style>
+          body div .title.sub {
+            color: blue
+          }
           body div #myid {
             width:100px;
             background-color: #ff5000;
@@ -29,7 +32,7 @@ const server = http.createServer((req, res) => {
         </head>
         <body>
           <div main='body' style="width:200px">
-              <span>hello</span>
+              <span class="title sub">hello</span>
               <img id="myid" />
               <img src='logo'/>
           </`)
