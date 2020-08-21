@@ -249,7 +249,8 @@ let request = new Request({
 void async function () {
   let response = await request.send()
   let dom = parser.parserHTML(response.body)
-  dom
+
+  console.log(dom)
 }()
 
 

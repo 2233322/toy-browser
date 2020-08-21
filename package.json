@@ -1,0 +1,25 @@
+{
+  "name": "toy-browser",
+  "version": "1.0.0",
+  "description": "URL -- http --> HTML -- parse --> DOM -- css computing --> DOM with CSS -- layout --> DOM with position -- render --> bitmap",
+  "main": "test.js",
+  "devDependencies": {},
+  "scripts": {
+    "client": "node ./src/client",
+    "server": "node ./src/server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "css": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2233322/toy-browser.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/2233322/toy-browser/issues"
+  },
+  "homepage": "https://github.com/2233322/toy-browser#readme"
+}

@@ -1,5 +1,4 @@
 const css = require('css')
-const { cpuUsage } = require('process')
 let rules = []
 
 function match(element, selector) {
@@ -77,6 +76,9 @@ function compare(sp1, sp2) {
 function addCSSRules (text) {
      let ast = css.parse(text)
     //console.log(JSON.stringify(ast, null, '    '))
+
+    // 媒体查询过滤样式
+    
     rules.push(...ast.stylesheet.rules)
 } 
 
@@ -140,6 +142,26 @@ function computeCSS(element) {
             }
         }
     }
+
+    // 行内样式处理
+    let lineStyle = element.attributes.filter(attr => attr.name === 'style')[0]
+    if (lineStyle) {
+        let text = `* { ${lineStyle.value} }`
+        let ast = css.parse(text)
+        let rule = ast.stylesheet.rules[0]
+        let sp = [0, 0, 0, 1]
+        for (let declaration of rule.declarations) {
+            if (!element.computedStyle[declaration.property]) {
+                element.computedStyle[declaration.property] = {}
+            }
+            element.computedStyle[declaration.property].value = declaration.value
+            element.computedStyle[declaration.property].specificity = sp
+
+        }
+        console.log(JSON.stringify(ast, null, '  '))
+    }
+    
+
 }
 
 module.exports = {

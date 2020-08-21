@@ -1,4 +1,5 @@
 const { addCSSRules, computeCSS } = require('./cssRulesParser')
+const { layout } = require('./layout')
 const EOF = Symbol('EOF')  // EOF: End Of File
 
 let currentToken = null
@@ -9,7 +10,7 @@ let stack = [{type: 'document', children: []}]
 
 // 提交token
 function emit(token) {
-    let top = stack[stack.length - 1]
+    let top = stack[stack.length - 1] // stack 最后一个元素
 
     if (token.type === 'startTag') {
 
@@ -53,6 +54,9 @@ function emit(token) {
                 //  添加css
                 addCSSRules(top.children[0].content)
             }
+
+            // layout 布局 不同属性不同ayout时机  toy-browser 只做 display:flex 布局
+            layout(top)
             stack.pop()
         }
         currentTextNode = null

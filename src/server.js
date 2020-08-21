@@ -15,12 +15,22 @@ const server = http.createServer((req, res) => {
       res.write(`<html maaa=a >
       <head>
         <style>
-          body div .title.sub {
-            color: blue
+          .a {
+            display: flex;
+            flex-wrap: wrap;
+            width: 320px;
+            height: 400px;
+            background-color: red
           }
-          body div #myid {
+          div .b {
             width:100px;
+            height: 200px;
             background-color: #ff5000;
+          }
+          div .c {
+            width:300px;
+            height: 100px;
+            background-color: #222333;
           }
           body div img {
             width:30px`)
@@ -31,10 +41,10 @@ const server = http.createServer((req, res) => {
         </style>
         </head>
         <body>
-          <div main='body' style="width:200px">
-              <span class="title sub">hello</span>
-              <img id="myid" />
-              <img src='logo'/>
+          <div class="a">
+            <div class="b"></div>
+            <div class="b"></div>
+            <div class="c"></div>
           </`)
 
     res.write(`div>
